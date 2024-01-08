@@ -1,0 +1,45 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+#content {
+    text-align: center;
+    margin-top: 50px;
+}
+
+.topnav {
+    overflow: hidden;
+    text-align: center;
+}
+
+.topnav a {
+    float: left;
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 15px 16px;
+    text-decoration: none;
+}
+
+.topnav a:hover {
+    background-color: #be0000; 
+}
+
+.active {
+    background-color: #cecece; 
+}
+
+
+#actionButton {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+footer {
+    text-align: center;
+    padding: 10px;
+    width: 100%;
+    bottom: 0;
+}
