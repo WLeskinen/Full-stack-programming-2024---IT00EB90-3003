@@ -6,6 +6,9 @@ import {
  } from "react-router-dom";
  import { updateContact } from "../contacts";
 
+ 
+ // Action function which handles 
+ // form submission, updates contact, and redirects to the contact's page
 export async function action({ request, params }) {
   const formData = await request.formData();
   const updates = Object.fromEntries(formData);
@@ -13,12 +16,14 @@ export async function action({ request, params }) {
   return redirect(`/contacts/${params.contactId}`);
 }
 
+// EditContact displays a form for editing contact details
 export default function EditContact() {
   const { contact } = useLoaderData();
   const navigate = useNavigate();
 
   return (
     <Form method="post" id="contact-form">
+    {/* Input fields for editing contact details */}
       <p>
         <span>Name</span>
         <input

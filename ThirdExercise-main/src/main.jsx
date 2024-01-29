@@ -19,7 +19,7 @@ import Index from "./routes/index";
 
 
 
-
+// Creates a router with routes and it's configurations
 const router = createBrowserRouter([
   {
     path: "/",
@@ -49,6 +49,7 @@ const router = createBrowserRouter([
   },
 ]);
 
+// Render the main application with a RouterProvider
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <RouterProvider router={router} />

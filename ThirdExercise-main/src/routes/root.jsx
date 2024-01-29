@@ -5,11 +5,18 @@ import {
   Form,
   useNavigation,
   useSubmit,
+  redirect,
 } from "react-router-dom";
-import { getContacts } from "../contacts";
+import { getContacts, createContact } from "../contacts";
 import { useEffect } from "react";
 
+// This function creates a new contact.
+export async function action() {
+  const contact = await createContact();
+  return redirect(`/contacts/${contact.id}/edit`);
+}
 
+// Loader function fetches contacts based on the search query from the request URL
 export async function loader({ request }) {
   const url = new URL(request.url);
   const q = url.searchParams.get("q") || "";
@@ -17,23 +24,27 @@ export async function loader({ request }) {
   return { contacts, q }
 }
 
-
+// Root component displays a sidebar with a search form, new contact button, and contact list.
 export default function Root() {
   const { contacts, q } = useLoaderData();
   const navigation = useNavigation();
   const submit = useSubmit();
 
+  // this constant determines if a search is in progress.
   const searching =
     navigation.location &&
     new URLSearchParams(navigation.location.search).has(
       "q"
     );
 
-
+  // Set the initial value of the search input when q changes.
   useEffect(() => {
     document.getElementById("q").value = q;
   }, [q]);
 
+  
+
+  // Render the sidebar with search form, new contact button, and contact list.
   return (
     <>
       <div id="sidebar">
@@ -70,6 +81,7 @@ export default function Root() {
           </Form>
         </div>
         
+         {/* Contact list */}
         <nav>
           {contacts.length ? (
             <ul>
@@ -104,6 +116,7 @@ export default function Root() {
           )}
         </nav>
       </div>
+      {/* Detail section with Outlet for rendering nested routes */}
       <div id="detail"
         className={
           navigation.state === "loading" ? "loading" : ""

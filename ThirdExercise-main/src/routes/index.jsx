@@ -1,3 +1,5 @@
+// This is the default component for our "/" route.
+// It renders a paragraph and a link to React router.com
 export default function Index() {
     return (
       <p id="zero-state">

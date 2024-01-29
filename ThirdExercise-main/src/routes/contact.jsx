@@ -5,12 +5,20 @@ import {
 } from "react-router-dom";
 import { getContact, updateContact } from "../contacts";
 
-
+// Loader function fetches contact details based on the contactId.
+// Throws a 404 error if the contact is not found.
 export async function loader({ params }) {
-  const contact = await getContact(params.contactId);
-  return { contact };
-}
+    const contact = await getContact(params.contactId);
+    if (!contact) {
+      throw new Response("", {
+        status: 404,
+        statusText: "Not Found",
+      });
+    }
+    return { contact };
+  }  
 
+// Action function handles form submission and updating the contact's favorite status
 export async function action({ request, params }) {
     let formData = await request.formData();
     return updateContact(params.contactId, {
@@ -18,12 +26,13 @@ export async function action({ request, params }) {
     });
   }
   
-
+// This component displays information about the contacts, additional info can be found in the comments.
 export default function Contact() {
   const { contact } = useLoaderData();
 
   return (
     <div id="contact">
+      {/* Display contact avatar */}
       <div>
         <img
           key={contact.avatar}
@@ -31,6 +40,7 @@ export default function Contact() {
         />
       </div>
 
+      {/* Display contact name, favorite button, Twitter link, notes, and edit/delete buttons */}
       <div>
         <h1>
           {contact.first || contact.last ? (
@@ -47,6 +57,7 @@ export default function Contact() {
           <p>
             <a
               target="_blank"
+              rel="noopener noreferrer"
               href={`https://twitter.com/${contact.twitter}`}
             >
               {contact.twitter}
@@ -56,6 +67,7 @@ export default function Contact() {
 
         {contact.notes && <p>{contact.notes}</p>}
 
+        {/* Edit and Delete buttons */}
         <div>
           <Form action="edit">
             <button type="submit">Edit</button>
@@ -81,6 +93,8 @@ export default function Contact() {
   );
 }
 
+
+// Favorite component renders a button to toggle the favorite status of a contact, the favorite can be marked by clicking on the star.
 function Favorite({ contact }) {
   const fetcher = useFetcher();
   let favorite = contact.favorite;
