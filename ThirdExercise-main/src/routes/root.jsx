@@ -7,7 +7,7 @@ import {
   useSubmit,
 } from "react-router-dom";
 import { getContacts } from "../contacts";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 
 export async function loader({ request }) {
@@ -29,6 +29,7 @@ export default function Root() {
       "q"
     );
 
+
   useEffect(() => {
     document.getElementById("q").value = q;
   }, [q]);
@@ -41,19 +42,23 @@ export default function Root() {
         <Form id="search-form" role="search">
             <input
               id="q"
+              className={searching ? "loading" : ""}
               aria-label="Search contacts"
               placeholder="Search"
               type="search"
               name="q"
               defaultValue={q}
               onChange={(event) => {
-                submit(event.currentTarget.form);
+                const isFirstSearch = q == null;
+                submit(event.currentTarget.form, {
+                  replace: !isFirstSearch,
+                });
               }}
               />
             <div
               id="search-spinner"
               aria-hidden
-              hidden={true}
+              hidden={!searching}
             />
             <div
               className="sr-only"
@@ -99,10 +104,11 @@ export default function Root() {
           )}
         </nav>
       </div>
-      <div id="detail">
+      <div id="detail"
         className={
-          Navigation.state === "loading" ? "loading" : ""
+          navigation.state === "loading" ? "loading" : ""
         }
+        >
         <Outlet />
       </div>
     </>
