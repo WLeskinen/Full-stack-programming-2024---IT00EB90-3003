@@ -3,18 +3,36 @@ import {
   NavLink,
   useLoaderData,
   Form,
+  useNavigation,
+  useSubmit,
 } from "react-router-dom";
 import { getContacts } from "../contacts";
+import { useEffect, useState } from "react";
 
-export async function loader( request ) {
-  const contacts = await getContacts();
-  return { contacts };
+
+export async function loader({ request }) {
+  const url = new URL(request.url);
+  const q = url.searchParams.get("q") || "";
+  const contacts = await getContacts(q);
+  return { contacts, q }
 }
 
 
-
 export default function Root() {
-  const { contacts } = useLoaderData();
+  const { contacts, q } = useLoaderData();
+  const navigation = useNavigation();
+  const submit = useSubmit();
+
+  const searching =
+    navigation.location &&
+    new URLSearchParams(navigation.location.search).has(
+      "q"
+    );
+
+  useEffect(() => {
+    document.getElementById("q").value = q;
+  }, [q]);
+
   return (
     <>
       <div id="sidebar">
@@ -27,7 +45,11 @@ export default function Root() {
               placeholder="Search"
               type="search"
               name="q"
-            />
+              defaultValue={q}
+              onChange={(event) => {
+                submit(event.currentTarget.form);
+              }}
+              />
             <div
               id="search-spinner"
               aria-hidden
@@ -78,6 +100,9 @@ export default function Root() {
         </nav>
       </div>
       <div id="detail">
+        className={
+          Navigation.state === "loading" ? "loading" : ""
+        }
         <Outlet />
       </div>
     </>
