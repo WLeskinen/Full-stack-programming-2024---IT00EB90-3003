@@ -1,15 +1,16 @@
 import {
   Outlet,
-  Link,
+  NavLink,
   useLoaderData,
   Form,
 } from "react-router-dom";
 import { getContacts } from "../contacts";
 
-export async function loader() {
+export async function loader( request ) {
   const contacts = await getContacts();
   return { contacts };
 }
+
 
 
 export default function Root() {
@@ -19,7 +20,7 @@ export default function Root() {
       <div id="sidebar">
         <h1>React Router Contacts</h1>
         <div>
-          <form id="search-form" role="search">
+        <Form id="search-form" role="search">
             <input
               id="q"
               aria-label="Search contacts"
@@ -36,7 +37,7 @@ export default function Root() {
               className="sr-only"
               aria-live="polite"
             ></div>
-          </form>
+          </Form>
           <Form method="post">
             <button type="submit">New</button>
           </Form>
@@ -47,7 +48,16 @@ export default function Root() {
             <ul>
               {contacts.map((contact) => (
                 <li key={contact.id}>
-                  <Link to={`contacts/${contact.id}`}>
+                  <NavLink
+                    to={`contacts/${contact.id}`}
+                    className={({ isActive, isPending }) =>
+                      isActive
+                        ? "active"
+                        : isPending
+                        ? "pending"
+                        : ""
+                    }
+                  >
                     {contact.first || contact.last ? (
                       <>
                         {contact.first} {contact.last}
@@ -56,7 +66,7 @@ export default function Root() {
                       <i>No Name</i>
                     )}{" "}
                     {contact.favorite && <span>★</span>}
-                  </Link>
+                  </NavLink>
                 </li>
               ))}
             </ul>
