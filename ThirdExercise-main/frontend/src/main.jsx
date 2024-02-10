@@ -10,7 +10,9 @@ import Contact, {
   loader as contactLoader,
   action as contactAction,
 } from "./routes/contact";
-import Root, { loader as rootLoader } from "./routes/root";
+import Root, { loader as rootLoader,
+action as rootAction,
+} from "./routes/root";
 import EditContact, {
   action as editAction,
 } from "./routes/edit";
@@ -26,6 +28,7 @@ const router = createBrowserRouter([
     element: <Root />,
     errorElement: <ErrorPage />,
     loader: rootLoader,
+    action: rootAction,
     children: [
       { index: true, element: <Index /> },
       {
