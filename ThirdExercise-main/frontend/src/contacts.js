@@ -13,6 +13,11 @@ export async function getContacts(query) {
   return contacts.sort(sortBy("last", "createdAt"));
 }
 
+axios.get('http://localhost:3000/contact/all').then(response => {
+  const notes = response.data
+  console.log(notes)
+})
+
 export async function createContact() {
   await fakeNetwork();
   let id = Math.random().toString(36).substring(2, 9);

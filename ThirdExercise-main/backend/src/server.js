@@ -1,12 +1,28 @@
 const mongoose = require('mongoose');
-const app = require('./routes/contactRoutes.js')
+const express = require('express');
+const app = express();
 const PORT = process.env.PORT || 3000;
-const cors = require('cors')
+const cors = require('cors');
+const contactRoutes = require('./routes/contactRoutes.js'); // Assuming contactRoutes.js contains your routes
 
 // MongoDB connection string
 const mongoURI = 'mongodb://localhost:27017/contact';
 
-app.use(cors({ origin: 'http://localhost:5173' })); // Allow requests from http://localhost:5173
+// CORS options
+const corsOptions = {
+  origin: 'http://localhost:5173',
+  optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+};
+
+app.get('/contact/.', cors(corsOptions), function (req, res, next) {
+  res.json({msg: 'This is CORS-enabled for only example.com.'});
+});
+
+// Apply global CORS middleware
+app.use(cors());
+
+// Use contactRoutes
+app.use('/', contactRoutes);
 
 // Connect to MongoDB
 mongoose.connect(mongoURI)
@@ -20,5 +36,3 @@ mongoose.connect(mongoURI)
   .catch((error) => {
     console.error('Error connecting to MongoDB:', error);
   });
-
-  app.use(cors())
