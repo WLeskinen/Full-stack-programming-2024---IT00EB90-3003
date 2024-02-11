@@ -86,7 +86,7 @@ contact_router.get("/contact/find/:id", async (req, res) => {
 });
 
 //Update a contact
-contact_router.put("/contact/edit/:id", async (req, res) => {
+contact_router.patch("/contact/edit/:id", async (req, res) => {
     const id = req.params.id;
     //const { first, last, avatar, notes, twitter, createdAt } = req.body;
     try {

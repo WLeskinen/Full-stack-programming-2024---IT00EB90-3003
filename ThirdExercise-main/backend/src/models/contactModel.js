@@ -6,7 +6,7 @@ const contactSchema = new mongoose.Schema({
   twitter: String,
   avatar: String,
   notes: String,
-  favorite: { type: Boolean, default: false }
+  createdAt: Date,
 });
 
 const Contact = mongoose.model('Contact', contactSchema);
