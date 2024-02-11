@@ -17,10 +17,6 @@ export async function getContacts(query) {
   return contacts.sort(sortBy("last", "createdAt"));
 }
 
-axios.get('http://localhost:3000/contact/all').then(response => {
-  const notes = response.data
-  console.log(notes)
-})
 
 export async function createContact() {
   await fakeNetwork();
@@ -45,7 +41,7 @@ export async function getContact(id) {
   let contact = await axios
       .get(`http://localhost:3000/contact/find/${id}`)
       .then((response) => {
-          return response.data.contact;
+          return response.data.contact[0];
       });
   return contact ?? null;
 }

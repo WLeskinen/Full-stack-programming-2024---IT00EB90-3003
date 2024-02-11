@@ -88,7 +88,6 @@ contact_router.get("/contact/find/:id", async (req, res) => {
 //Update a contact
 contact_router.patch("/contact/edit/:id", async (req, res) => {
     const id = req.params.id;
-    //const { first, last, avatar, notes, twitter, createdAt } = req.body;
     try {
         await Contact.findOne({ _id: id }).then(async (contact) => {
             if (contact) {
@@ -145,5 +144,5 @@ contact_router.delete("/contact/delete/:id", (req, res) => {
     }
 });
 
-// exports contact_router as a module for server.js
+// exports contact_router as a module for
 module.exports = contact_router
