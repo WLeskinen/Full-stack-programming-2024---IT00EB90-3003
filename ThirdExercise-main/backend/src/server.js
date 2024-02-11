@@ -8,6 +8,7 @@ const contactRoutes = require('./routes/contactRoutes.js');
 // MongoDB connection string
 const mongoURI = 'mongodb://localhost:27017/contact';
 
+// Allowing the connection to go to our VITE host.
 const corsOptions = {
   origin: 'http://localhost:5173',
   optionsSuccessStatus: 200 
@@ -17,10 +18,10 @@ app.get('/contact/.', cors(corsOptions), function (req, res, next) {
   res.json({msg: 'This is a cors enabled function'});
 });
 
-// Apply CORS middleware
+// Applying CORS 
 app.use(cors());
 
-// Use contactRoutes
+// Importing contactRoutes
 app.use('/', contactRoutes);
 
 // Connect to MongoDB

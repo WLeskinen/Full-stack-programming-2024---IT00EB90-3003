@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 
+//responsible for the schema.
 const contactSchema = new mongoose.Schema({
   first: String,
   last: String,

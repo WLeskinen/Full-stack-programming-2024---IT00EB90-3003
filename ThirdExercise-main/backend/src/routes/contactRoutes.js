@@ -30,7 +30,7 @@ contact_router.get("/contact/all", async (req, res) => {
     }
 });
 
-//Creating a Contact
+//Creates a contact
 contact_router.post("/contact/create", async (req, res) => {
     const { first, last, avatar, notes, twitter, createdAt } = req.body;
 
@@ -59,7 +59,7 @@ contact_router.post("/contact/create", async (req, res) => {
     }
 });
 
-//Get a Contact from id
+//Gets a Contact from id
 contact_router.get("/contact/find/:id", async (req, res) => {
     try {
         const id = req.params.id;
@@ -119,7 +119,7 @@ contact_router.patch("/contact/edit/:id", async (req, res) => {
     }
 });
 
-// Delete a Contact
+// Deletes a Contact
 contact_router.delete("/contact/delete/:id", (req, res) => {
     const contactId = req.params.id;
     try {
@@ -145,5 +145,5 @@ contact_router.delete("/contact/delete/:id", (req, res) => {
     }
 });
 
-// export default contact_router;
+// exports contact_router as a module for server.js
 module.exports = contact_router
