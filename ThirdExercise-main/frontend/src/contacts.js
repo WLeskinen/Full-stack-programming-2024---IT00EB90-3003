@@ -1,6 +1,7 @@
 import localforage from "localforage";
 import { matchSorter } from "match-sorter";
 import sortBy from "sort-by";
+import axios from "axios";
 
 export async function getContacts(query) {
   await fakeNetwork(`getContacts:${query}`);

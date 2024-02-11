@@ -1,24 +1,24 @@
-const express = require('express');
 const mongoose = require('mongoose');
-const cors = require('cors');
+const app = require('./routes/contactRoutes.js')
+const PORT = process.env.PORT || 3000;
+const cors = require('cors')
 
-const app = express();
-const port = 3000;
+// MongoDB connection string
+const mongoURI = 'mongodb://localhost:27017/contact';
+
+app.use(cors({ origin: 'http://localhost:5173' })); // Allow requests from http://localhost:5173
 
 // Connect to MongoDB
-mongoose.connect("mongodb://localhost:27017/server")
-  .then(() => console.log('Connected to MongoDB'))
-  .catch(err => console.error('Error connecting to MongoDB:', err));
-
-// Enables CORS
-app.use(cors());
-
-app.get('/', (req, res) => {
-  res.send('Hello World!')
+mongoose.connect(mongoURI)
+  .then(() => {
+    console.log('Connected to MongoDB');
+    // Start your Express server once connected to MongoDB
+    app.listen(PORT, () => {
+      console.log(`Server is running on http://localhost:${PORT}`);
+    });
   })
-  
+  .catch((error) => {
+    console.error('Error connecting to MongoDB:', error);
+  });
 
-// Start the server
-app.listen(port, () => {
-  console.log(`Server is running on ${port}`);
-});
+  app.use(cors())
