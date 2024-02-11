@@ -46,7 +46,7 @@ export default function EditContact() {
         <input
           type="text"
           name="twitter"
-          placeholder="@jack"
+          placeholder="@username"
           defaultValue={contact.twitter}
         />
       </label>

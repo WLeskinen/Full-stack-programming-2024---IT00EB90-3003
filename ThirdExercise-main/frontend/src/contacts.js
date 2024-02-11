@@ -45,7 +45,7 @@ export async function getContact(id) {
   let contact = await axios
       .get(`http://localhost:3000/contact/find/${id}`)
       .then((response) => {
-          return response.data.contact[0];
+          return response.data.contact;
       });
   return contact ?? null;
 }
