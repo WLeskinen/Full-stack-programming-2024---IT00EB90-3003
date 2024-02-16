@@ -4,6 +4,9 @@ import Home from "./pages/Home";
 import Blogs from "./pages/Blogs";
 import Contact from "./pages/Contact";
 import NoPage from "./pages/NoPage";
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+
 
 export default function App() {
   return (
@@ -19,4 +22,3 @@ export default function App() {
     </BrowserRouter>
   );
 }
-

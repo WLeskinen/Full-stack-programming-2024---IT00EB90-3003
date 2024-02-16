@@ -12,9 +12,9 @@ export default function Home() {
 
   return (
     <div>
-      <h2>Welcome</h2>
+      <h1>Welcome</h1>
       <h2>Home Page</h2>
-      <div>This is the homepage of our website, you may explore the other sections using the navigation above.</div>
+      <p>This is the homepage of our website, you may explore the other sections using the navigation above.</p>
       <br />
       <Card>
         <Card.Body>

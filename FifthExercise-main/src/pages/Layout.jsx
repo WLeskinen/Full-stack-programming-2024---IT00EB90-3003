@@ -1,10 +1,12 @@
 import { Outlet, Link } from "react-router-dom";
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 const Layout = () => {
   return (
     <>
       <nav>
-        <h1>My Website</h1>
+        <h2>My Website</h2>
         <ul>
           <li>
             <Link to="/">Home</Link>
