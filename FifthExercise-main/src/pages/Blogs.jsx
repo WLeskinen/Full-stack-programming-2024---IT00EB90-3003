@@ -1,10 +1,14 @@
 import React from 'react';
-import { Accordion, Card, Button } from 'react-bootstrap';
+import { Accordion, Card } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 function Blogs() {
   return (
+    <div>
+    <h1>Blogs</h1>
+    <p>Blog articles</p>
+    <p>Find the latest articles and blog posts here.</p>
     <Accordion>
       <Accordion.Item eventKey="0">
         <Accordion.Header>Accordion Item #1</Accordion.Header>
@@ -41,6 +45,7 @@ function Blogs() {
         </Accordion.Body>
       </Accordion.Item>
     </Accordion>
+  </div>
   );
 }
 
