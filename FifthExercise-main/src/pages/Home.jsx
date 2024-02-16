@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Card, Form, Button, Alert } from 'react-bootstrap';
 
+
 export default function Home() {
   const [email, setEmail] = useState('');
   const [showSuccess, setShowSuccess] = useState(false);
@@ -10,11 +11,19 @@ export default function Home() {
     setShowSuccess(true);
   };
 
+  const handleClose = () => {
+    setShowSuccess(false);
+  };
+
   return (
     <div>
-      <h1>Welcome</h1>
-      <h2>Home Page</h2>
-      <p>This is the homepage of our website, you may explore the other sections using the navigation above.</p>
+      <Card>
+        <Card.Header><h4>Welcome!</h4></Card.Header>
+      <Card.Body>
+        <h5>Home Page</h5>
+        <p>This is the homepage of our website. Explore other section susing the navigation above.</p>
+      </Card.Body>
+      </Card>
       <br />
       <Card>
         <Card.Body>
@@ -30,7 +39,8 @@ export default function Home() {
               Subscribe
             </Button>
           </Form>
-          {showSuccess && <Alert variant="success">Successfully subscribed with email: {email}</Alert>}
+          <br />
+          {showSuccess && ( <Alert variant="success" onClose={handleClose} dismissible> Successfully subscribed with email: {email} </Alert>)}
         </Card.Body>
       </Card>
     </div>
