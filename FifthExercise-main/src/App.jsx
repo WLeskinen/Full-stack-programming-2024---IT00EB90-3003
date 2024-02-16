@@ -7,7 +7,7 @@ import NoPage from "./pages/NoPage";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 
-
+// Application main function, routes the paths from our /src/pages folder.
 export default function App() {
   return (
     <BrowserRouter>
